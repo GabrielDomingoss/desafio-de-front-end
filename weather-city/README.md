@@ -153,7 +153,7 @@ http://localhost:3000
 
 A aplicação está disponível online através do Vercel, permitindo acesso rápido e fácil:
 
-- [Acessar WeatherCity no Vercel](https://weather-city-8bh58w4kt-gabrieldomingoss-projects.vercel.app)
+- [Acessar WeatherCity no Vercel](https://weather-city-a8f4f9919-gabrieldomingoss-projects.vercel.app)
 
 ---
 
