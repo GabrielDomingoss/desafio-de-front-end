@@ -170,7 +170,7 @@ export default function CityWeather() {
                     {/* Barra lateral divisória */}
                     <div className="w-[1px] h-8 self-center bg-[#DFE4EA] mx-[0.8rem] hidden md:block" />
 
-                    <div className="text-[1.25rem] font-extralight leading-[120%] mx-[0.3rem] md:mx-0 mt-[1rem] md:mt-0">
+                    <div className="text-[1.25rem] font-extralight leading-[120%] mx-[0.7rem] md:mx-0 mt-[1rem] md:mt-0">
                         <p>Sunset</p>
                         {/* Tempo para o anoitecer */}
                         <p className="mt-2">
