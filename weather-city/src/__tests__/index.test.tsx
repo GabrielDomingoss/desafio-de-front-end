@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { useRouter } from "next/router";
-import Home from ".";
 import React from "react";
+import Home from "@/pages";
 
 // Mock do useRouter do Next.js para interceptar navegações
 jest.mock('next/router', () => ({

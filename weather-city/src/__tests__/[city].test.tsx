@@ -1,10 +1,10 @@
 import { api } from "@/services/api";
 import { useRouter } from "next/router";
-import CityWeather from "./[city]";
 import { render, screen, waitFor } from "@testing-library/react";
 import { useForecastWeather } from "@/hooks/forecastWeather";
 import { WeatherResponse } from "@/types/weather";
 import React from "react";
+import CityWeather from "@/pages/city/[city]";
 
 // Mock das dependências externas
 jest.mock('@/services/api', () => ({

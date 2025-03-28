@@ -1,4 +1,4 @@
-import { getTimeOfDayIcon } from "../timeOfDay";
+import { getTimeOfDayIcon } from "@/utils/timeOfDay";
 
 // Agrupa os testes da função getTimeOfDayIcon
 describe('getTimeOfDayIcon', () => {
