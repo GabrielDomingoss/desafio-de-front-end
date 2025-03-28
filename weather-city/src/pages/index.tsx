@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Globe from '../assets/globe.png';
 import React from "react";
 
+// lista de cidades disponíveis
 const cities = [
   { name: 'Dallol', country: 'NG' },
   { name: 'Fairbanks', country: 'US' },
@@ -15,19 +16,24 @@ const cities = [
 export default function Home() {
   const router = useRouter();
 
+  // Função para redirecionar para a página de detalhes do clima da cidade
   const handleClick = (city: string, country: string) => {
     router.push(`/city/${city}?country=${country}`);
   }
 
   return (
     <main className="min-h-screen bg-[#0F0F0F] text-[#F9F9F9] flex flex-col items-center font-inter px-[2.719rem] py-[2rem] sm:py-0">
+      {/* Título principal da página */}
       <h1 className="text-[3rem] font-medium sm:mt-[2rem] sm:mt-[9.344rem] mb-[0.25rem]">Weather</h1>
+      
+      {/* Subtítulo orientando o usuário */}
       <p className="text-[1.563rem] mb-[3.031rem]">Select a city</p>
 
       <div className="mb-[3.031rem]">
         <Image src={Globe} alt="Globe" className="w-[8.938rem] h-[8.938rem]" />
       </div>
 
+      {/* Lista de links para diferentes cidades */}
       <div className="grid grid-cols-3 sm:grid-cols-3 gap-x-[1.5rem] sm:gap-x-[3rem] gap-y-[2rem] xl:mb-[28.906rem] text-xs text-center w-full">
         {cities.map(city => (
           <p 
