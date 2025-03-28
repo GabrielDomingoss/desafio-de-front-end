@@ -19,6 +19,7 @@ WeatherCity é uma aplicação desenvolvida com Next.js, React e Tailwind CSS qu
 - **Jest e React Testing Library** para testes
 - **Axios** para comunicação com APIs externas
 - **Docker**
+- **Vercel**
 
 
 ## Pré-requisitos
@@ -145,6 +146,14 @@ docker compose up --build
 ```
 http://localhost:3000
 ```
+
+---
+
+## 🌐 Acesso ao Site
+
+A aplicação está disponível online através do Vercel, permitindo acesso rápido e fácil:
+
+- [Acessar WeatherCity no Vercel](https://weather-city-8bh58w4kt-gabrieldomingoss-projects.vercel.app)
 
 ---
 
