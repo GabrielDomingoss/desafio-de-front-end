@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Globe from '../assets/globe.png';
+import React from "react";
 
 const cities = [
   { name: 'Dallol', country: 'NG' },

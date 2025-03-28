@@ -4,6 +4,7 @@ import CityWeather from "./[city]";
 import { render, screen, waitFor } from "@testing-library/react";
 import { useForecastWeather } from "@/hooks/forecastWeather";
 import { WeatherResponse } from "@/types/weather";
+import React from "react";
 
 jest.mock('@/services/api', () => ({
   api: {
@@ -95,7 +96,7 @@ describe('Página CityWeather', () => {
     render(<CityWeather />);
 
     await waitFor(() => {
-      expect(screen.getByText(/Error on loading data/i)).toBeInTheDocument();
+      expect(screen.getByText(/We are unable to load weather information at the moment. Please try again later./i)).toBeInTheDocument();
     });
   });
 });

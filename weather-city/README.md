@@ -1,40 +1,179 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🌤 WeatherCity
 
-## Getting Started
+## Sobre o Projeto
 
-First, run the development server:
+WeatherCity é uma aplicação desenvolvida com Next.js, React e Tailwind CSS que permite consultar e exibir informações detalhadas sobre o clima atual e previsões para diferentes cidades ao redor do mundo utilizando a API OpenWeather.
+
+## Principais Funcionalidades
+
+- **Listagem de Cidades:** Visualize e selecione facilmente as cidades disponíveis.
+- **Detalhes do Clima:** Exibição das condições climáticas atuais, temperaturas mínima e máxima, velocidade do vento, umidade e horários do nascer e pôr do sol.
+- **Previsão Detalhada:** Visualize previsões para diferentes períodos do dia, como madrugada, manhã, tarde e noite.
+
+## Tecnologias Usadas
+
+- **React**
+- **Next.js**
+- **TypeScript**
+- **Tailwind CSS**
+- **Jest e React Testing Library** para testes
+- **Axios** para comunicação com APIs externas
+- **Docker**
+
+
+## Pré-requisitos
+
+- Node.js >= 18.x
+- npm ou yarn
+
+## Como executar o projeto
+
+### Instalação
+
+Clone o repositório:
+
+```bash
+git clone https://github.com/GabrielDomingoss/desafio-de-front-end.git
+cd desafio-de-front-end/weather-city
+```
+
+Instale as dependências:
+
+```bash
+npm install
+# ou
+yarn install
+```
+
+### Configuração de variáveis de ambiente
+
+Crie um arquivo `.env.local` na raiz do projeto com a seguinte variável:
+
+```env
+NEXT_PUBLIC_OPENWEATHER_API_KEY=sua_chave_da_api
+```
+
+Obtenha sua chave da API no site oficial [OpenWeather](https://openweathermap.org/api).
+
+### Execução local
 
 ```bash
 npm run dev
-# or
+# ou
+npm start
+# ou
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# ou
+yarn
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A aplicação estará disponível em: `http://localhost:3000`
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Testes
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Execute os testes com cobertura usando:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+```bash
+npm run test
+# ou
+yarn test:coverage
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Para verificar a cobertura de testes:
 
-## Learn More
+```bash
+npm run test:coverage
+# ou
+yarn test:coverage
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+## 🐳 Executar com Docker
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Pré-requisitos
 
-## Deploy on Vercel
+- Docker instalado ([Docker Desktop](https://docs.docker.com/get-docker/))
+- Docker Compose ([Docker Compose](https://docs.docker.com/compose/install/))
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Configuração Docker
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+**Dockerfile** já incluso no projeto:
+
+```dockerfile
+FROM node:20-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+**docker-compose.yml**:
+
+```yaml
+version: '3.9'
+
+services:
+  weather-city:
+    container_name: weather-city
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_OPENWEATHER_API_KEY: ${NEXT_PUBLIC_OPENWEATHER_API_KEY}
+```
+
+### Execução Docker
+
+1. Crie um arquivo `.env` na raiz com a variável:
+
+```env
+NEXT_PUBLIC_OPENWEATHER_API_KEY=sua_chave_da_api
+```
+
+2. Execute com Docker Compose:
+
+```bash
+docker compose up --build
+```
+
+3. Acesse o projeto em:
+
+```
+http://localhost:3000
+```
+
+---
+
+## Estrutura do Projeto
+
+```
+weather-city
+├── public
+├── src
+│   ├── assets
+│   ├── hooks
+│   ├── pages
+│   │   ├── city
+│   │   ├── _app.tsx
+│   │   ├── _document.tsx
+│   │   └── index.tsx
+│   ├── services
+│   ├── styles
+│   ├── types
+│   └── utils
+├── Dockerfile
+├── docker-compose.yml
+├── jest.config.js
+├── jest.setup.ts
+├── tsconfig.json
+├── package.json
+└── README.md
+```
+
+## Autor
+
+Desenvolvido por **[Gabriel Domingos](https://github.com/GabrielDomingoss)**

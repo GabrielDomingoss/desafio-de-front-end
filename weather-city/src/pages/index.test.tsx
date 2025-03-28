@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { useRouter } from "next/router";
 import Home from ".";
+import React from "react";
 
 jest.mock('next/router', () => ({
     useRouter: jest.fn()

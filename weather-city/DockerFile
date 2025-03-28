@@ -1,0 +1,23 @@
+# Imagem base
+FROM node:20-alpine
+
+# Diretório do projeto no container
+WORKDIR /app
+
+# Copia os arquivos package.json e package-lock.json
+COPY package*.json ./
+
+# Instala as dependências
+RUN npm install
+
+# Copia todos os arquivos do projeto
+COPY . .
+
+# Gera o build do Next.js
+RUN npm run build
+
+# Expoe a porta 3000
+EXPOSE 3000
+
+# Comando inicial do container
+CMD ["npm", "start"]

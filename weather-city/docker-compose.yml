@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+  weather-city:
+    container_name: weather-city
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_OPENWEATHER_API_KEY: ${NEXT_PUBLIC_OPENWEATHER_API_KEY}
