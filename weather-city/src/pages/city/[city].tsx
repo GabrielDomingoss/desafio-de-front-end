@@ -148,9 +148,9 @@ export default function CityWeather() {
                     ))}
                 </div>
 
-                <div className="flex justify-center md:flex-row flex-wrap mt-6 md:mt-16 px-[3.313rem]">
+                <div className="flex justify-center md:flex-row flex-wrap mt-6 md:mt-16 md:px-[3.313rem] gap-[1rem]">
                     {/* Informações a respeito do clima */}
-                    <div className="text-[1.25rem] font-extralight leading-[120%]">
+                    <div className="text-[1.25rem] font-extralight leading-[120%] w-[6.875rem]">
                         <p>Wind speed</p>
                         {/* Velocidade do vento */}
                         <p className="mt-2">{weather?.wind?.speed ?? "--"} m/s</p>
@@ -159,7 +159,7 @@ export default function CityWeather() {
                     {/* Barra lateral divisória */}
                     <div className="w-[1px] h-8 self-center bg-[#DFE4EA] mx-[0.8rem]" />
 
-                    <div className="text-[1.25rem] font-extralight leading-[120%]">
+                    <div className="text-[1.25rem] font-extralight leading-[120%] w-[6.875rem]">
                         <p>Sunrise</p>
                         {/* Tempo para o amanhecer */}
                         <p className="mt-2">
@@ -170,7 +170,7 @@ export default function CityWeather() {
                     {/* Barra lateral divisória */}
                     <div className="w-[1px] h-8 self-center bg-[#DFE4EA] mx-[0.8rem] hidden md:block" />
 
-                    <div className="text-[1.25rem] font-extralight leading-[120%] mx-[0.7rem] md:mx-0 mt-[1rem] md:mt-0">
+                    <div className="text-[1.25rem] font-extralight leading-[120%] w-[6.875rem]">
                         <p>Sunset</p>
                         {/* Tempo para o anoitecer */}
                         <p className="mt-2">
@@ -181,7 +181,7 @@ export default function CityWeather() {
                     {/* Barra lateral divisória */}
                     <div className="w-[1px] h-8 self-center bg-[#DFE4EA] mx-[0.8rem] mt-[1rem] md:mt-0" />
 
-                    <div className="text-[1.25rem] font-extralight leading-[120%] mt-[1rem] md:mt-0">
+                    <div className="text-[1.25rem] font-extralight leading-[120%] w-[6.875rem]">
                         <p>Humidity</p>
                         {/* Umidade */}
                         <p className="mt-2">{weather?.main?.humidity ?? "--"}%</p>
