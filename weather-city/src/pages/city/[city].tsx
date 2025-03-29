@@ -2,13 +2,14 @@
 import { api } from "@/services/api";
 import { WeatherResponse } from "@/types/weather";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { useForecastWeather } from "@/hooks/forecastWeather";
 import { getWeatherIcon } from "@/utils/weatherIcons";
 import { getTimeOfDayIcon } from "@/utils/timeOfDay";
 import { capitalize, formatTimeToAMPM } from "@/utils/helpers";
 import ErrorImg from '../../assets/error.png';
+import { determineBackgroundColor } from "@/utils/backgroundColor";
 
 export default function CityWeather() {
     const router = useRouter();
@@ -17,14 +18,19 @@ export default function CityWeather() {
     const [loading, setLoading] = useState(true); // Estado de carregamento da página
     const [error, setError] = useState<string | null>(null); // Flag caso haja erros no resgate de informações
     const forecast = useForecastWeather(city as string); // Dados da previsão de acordo com o tempo do dia
+    const backgroundColor = useMemo(() => determineBackgroundColor(weather), [weather]);
+
     const icon = 
         weather ? 
         `/icons/${getWeatherIcon(weather.weather[0].main)}` 
         : '/icons/BsSun.svg'; // ícone principal da página, varia de acordo com o clima, se não é sol por padrão
+    const isDark = backgroundColor === '#2CAEFF' || backgroundColor === '#0F0F0F'; // background que muda as cores dos ícones e fontes
+    const textColorClass = isDark ? 'text-white' : 'text-[#0F0F0F]'; // cor branca no texto caso o clima seja clear ou esteja de noite 
+    const iconColorClass = isDark ? 'invert' : ''; // cor branca nos ícones caso o clima seja clear ou esteja de noite
 
     // Efeito para buscar os dados meteorológicos ao carregar o componente ou quando a cidade muda
     useEffect(() => {
-        if (!city) return;
+        if (!router.isReady || typeof city !== 'string') return;
 
         async function getWeather() {
             try {
@@ -50,16 +56,17 @@ export default function CityWeather() {
             }
         }
 
-        getWeather();
-    }, [city]);
-
+        if (city) {
+            getWeather();
+        }
+    }, [router.isReady, city]);
     
     // Exibe uma animação e uma mensagem de carregamento enquanto os dados estão sendo buscados
     if (loading) {
         return (
-            <div className="flex flex-col items-center justify-center min-h-screen bg-[#CACACA] text-[#0F0F0F]">
-                <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-[#0F0F0F]"></div>
-                <p className="mt-4 text-lg font-light">Loading...</p>
+            <div className={`flex flex-col items-center justify-center min-h-screen bg-[${backgroundColor}]  ${textColorClass}`}>
+                <div className={`w-16 h-16 border-4 border-dashed rounded-full animate-spin border-[#0F0F0F] ${isDark ? 'border-white' : 'border-[#0F0F0F]'} ${textColorClass}`} />
+                <p className={`mt-4 text-lg font-light ${textColorClass}`}>Loading...</p>
             </div>
         );
     }
@@ -67,16 +74,16 @@ export default function CityWeather() {
     // Exibe uma mensagem de erro caso ocorra algum problema na requisição
     if (error) {
         return (
-            <div className="flex flex-col items-center justify-center min-h-screen bg-[#CACACA] text-[#0F0F0F] px-4">
-                 <Image
+            <div className={`flex flex-col items-center justify-center min-h-screen bg-[${backgroundColor}]  ${textColorClass} px-4`}>
+                <Image
                     src={ErrorImg}
                     className="w-16 h-16 text-red-500 mb-4"
                     alt="Error Icon"
                     width={0}
                     height={0}
                 />
-                <h2 className="text-2xl font-medium">Oops! Something went wrong.</h2>
-                <p className="text-base font-extralight mt-2 text-center max-w-sm">
+                <h2 className={`text-2xl font-medium ${textColorClass}`}>Oops! Something went wrong.</h2>
+                <p className={`text-base font-extralight mt-2 text-center max-w-sm ${textColorClass}`}>
                     {error}
                 </p>
             </div>
@@ -85,8 +92,8 @@ export default function CityWeather() {
 
     // Exibe os dados meteorológicos quando disponíveis
     return (
-        <div className="flex flex-col text-center bg-[#CACACA] min-h-screen text-[#0F0F0F]">
-            <div className="mt-[2rem] mr-[1rem] mb-[5.125rem] ml-[1rem] md:my-[9.313rem]">
+        <div style={{backgroundColor}} className={`flex flex-col text-center  ${textColorClass} min-h-screen`}>
+            <div className={`mt-[2rem] mr-[1rem] mb-[5.125rem] ml-[1rem] md:my-[9.313rem] ${textColorClass}`}>
                 <div className="text-center">
                     {/* Nome da cidade */}
                     <h1 className="text-[3rem] font-light leading-[120%]">{weather?.name}</h1>
@@ -105,14 +112,26 @@ export default function CityWeather() {
                         <p className="mt-4 text-[2.625rem] font-extralight leading-[120%]">°C</p>
                         <div className="mt-[1.625rem] text-center flex flex-col items-center">
                             <p className="text-base font-extralight leading-[120%] flex items-center">
-                                <Image src="/icons/stash_arrow-up-light.svg" alt="Arrow Up" width={16} height={16} />
+                                <Image 
+                                    src="/icons/stash_arrow-up-light.svg" 
+                                    alt="Arrow Up" 
+                                    width={16} 
+                                    height={16}
+                                    className={iconColorClass}
+                                />
                                 <span>
                                     {/* Temperatura Máxima da cidade */}
                                     {weather ? `${Math.round(weather?.main?.temp_max)}°` : "--"}
                                 </span>
                             </p>
                             <p className="text-base font-extralight leading-[120%] flex items-center">
-                                <Image src="/icons/stash_arrow-down-light.svg" alt="Arrow Down" width={16} height={16} />
+                                <Image 
+                                    src="/icons/stash_arrow-down-light.svg" 
+                                    alt="Arrow Down" 
+                                    width={16} 
+                                    height={16} 
+                                    className={iconColorClass}
+                                />
                                 <span>
                                     {/* Temperatura Mínima da cidade */}
                                     {weather ? `${Math.round(weather?.main?.temp_min)}°` : "--"}
@@ -124,7 +143,13 @@ export default function CityWeather() {
 
                 <div className="mt-4 flex justify-center">
                     {/* Ícone que varia de acordo com o clima da cidade */}
-                    <Image src={icon} alt="Weather Icon" width={176} height={176} />
+                    <Image 
+                        src={icon} 
+                        alt="Weather Icon" 
+                        width={176} 
+                        height={176} 
+                        className={iconColorClass}
+                    />
                 </div>
 
                 <div className="flex justify-center gap-6 md:gap-[3rem] flex-wrap md:flex-row mt-6 md:mt-4">
@@ -140,7 +165,7 @@ export default function CityWeather() {
                                 alt={data.description}
                                 width={48}
                                 height={48}
-                                className="mt-4"
+                                className={`mt-4 ${iconColorClass}`}
                             />
                             {/* Temperatura prevista */}
                             <p className="text-[1.25rem] font-extralight leading-[120%] mt-4">{data.temp}°C</p>

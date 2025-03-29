@@ -64,7 +64,9 @@ export function useForecastWeather(city: string) {
             }
         }
 
-        getForecast();
+        if (city) {
+            getForecast();
+        }
     }, [city]);
 
     return forecast // Define a mensagem de erro em caso de falha
