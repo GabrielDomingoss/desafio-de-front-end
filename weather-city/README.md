@@ -2,15 +2,7 @@
 
 ## Sobre o Projeto
 
-WeatherCity é uma aplicação desenvolvida com Next.js, React e Tailwind CSS que permite consultar e exibir informações detalhadas sobre o clima atual e previsões para diferentes cidades ao redor do mundo utilizando a API OpenWeather.
-
-## Capturas de Tela 📸
-Aqui estão algumas capturas de tela do projeto:
-
-![Tela Inicial Desktop](src/assets/screenshots/tela_inicial_desktop.jpg)
-![Tela Inicial Mobile](src/assets/screenshots/tela_inicial_mobile.png)
-![Tela de Clima da Cidade Desktop](src/assets/screenshots/tela_de_clima_cidade_desktop.jpg)  
-![Tela de Clima da Cidade Mobile](src/assets/screenshots/tela_de_clima_cidade_mobile.png)  
+WeatherCity é uma aplicação desenvolvida com Next.js, React e Tailwind CSS que permite consultar e exibir informações detalhadas sobre o clima atual e previsões para diferentes cidades ao redor do mundo utilizando a API OpenWeather. 
 
 ## Principais Funcionalidades
 
@@ -190,6 +182,14 @@ weather-city
 ├── package.json
 └── README.md
 ```
+
+## Capturas de Tela 📸
+Aqui estão algumas capturas de tela do projeto:
+
+![Tela Inicial Desktop](src/assets/screenshots/tela_inicial_desktop.jpg)
+![Tela Inicial Mobile](src/assets/screenshots/tela_inicial_mobile.png)
+![Tela de Clima da Cidade Desktop](src/assets/screenshots/tela_de_clima_cidade_desktop.jpg)  
+![Tela de Clima da Cidade Mobile](src/assets/screenshots/tela_de_clima_cidade_mobile.png) 
 
 ## Autor
 
